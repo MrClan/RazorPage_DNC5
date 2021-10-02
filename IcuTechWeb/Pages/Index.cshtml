@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+        ViewData["Title"] = "UserInfo";
+        var isSuccess = TempData.ContainsKey("IsSuccess") && bool.Parse(TempData["IsSuccess"].ToString());
+    }
+
+<div class="text-center">
+    <form class="form-signin" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Fetch User Info</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" asp-for="LoginCustomer.Username" id="inputEmail" class="form-control px-3 my-3" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only px-3 mt-3 mb-5">Password</label>
+        <input type="password" asp-for="LoginCustomer.Password" id="inputPassword" class="form-control px-3 mt-3 mb-5" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        @{
+            if (TempData.ContainsKey("Message"))
+            {
+                var x = 3;
+                <p class='@(isSuccess?"text-success":"text-danger")'>
+                    @TempData["Message"]?.ToString() <br/>
+                    @TempData["CustomerInfo"]?.ToString()
+                </p>
+            }
+        }
+    </div>
+</div>

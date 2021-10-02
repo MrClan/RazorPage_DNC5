@@ -1,0 +1,39 @@
+﻿@page
+@model RegisterModel
+@{
+        ViewData["Title"] = "Register";
+        var isSuccess = TempData.ContainsKey("IsSuccess") && bool.Parse(TempData["IsSuccess"].ToString());
+    }
+
+<div class="text-center">
+    <form class="form-signin" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Register New User</h1>
+        <label for="inputEmail" class="sr-only px-3 my-3">Email address</label>
+        <input type="email" asp-for="RegisterCustomer.Email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" asp-for="RegisterCustomer.Password" id="inputPassword" class="form-control px-3 my-3" placeholder="Password" required>
+        <label for="fName" class="sr-only px-3 my-3">First Name</label>
+        <input type="text" asp-for="RegisterCustomer.FirstName" id="fName" class="form-control px-3 my-3" placeholder="First Name" required autofocus>
+        <label for="lName" class="sr-only px-3 my-3">Last Name</label>
+        <input type="text" asp-for="RegisterCustomer.LastName" id="lName" class="form-control px-3 my-3" placeholder="Last Name" required autofocus>
+        <label for="mobile" class="sr-only px-3 my-3">Mobile</label>
+        <input type="text" asp-for="RegisterCustomer.Mobile" id="mobile" class="form-control px-3 mt-3 mb-5" placeholder="Mobile" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        @{
+            if (TempData.ContainsKey("Message"))
+            {
+                var x = 3;
+                <p class='@(isSuccess?"text-success":"text-danger")'>
+                    <b>@(isSuccess?"OPERATION SUCCEEDED":"OPERATION FAILED")</b>
+                    @TempData["Message"]?.ToString() <br/>
+                    @TempData["CustomerInfo"]?.ToString()
+                </p>
+            }
+        }
+    </div>
+</div>
